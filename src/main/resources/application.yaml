@@ -5,3 +5,21 @@ spring:
 server:
   http-port: 8080
   shutdown: graceful
+
+logging:
+  level:
+    root: DEBUG
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+# 서버 실행시 VM OPTIONS 사용 -Djasypt.encryptor.password=cooingpop
+
+datasource:
+  public:
+    url: mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: ENC(3Axq03mjDNDTYk8GtS/nApWJiXXzy3SV)
+    password: ENC(inKWo0++SlCqf4kewyjcbTPha1pPuopD)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    max-active: 4
+    max-idle: 4
