@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: api-client
+
+server:
+  http-port: 8080
+  shutdown: graceful
