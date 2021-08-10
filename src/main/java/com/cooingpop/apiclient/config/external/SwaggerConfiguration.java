@@ -23,7 +23,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author 박준영
  **/
 @Configuration
-@EnableSwagger2
 public class SwaggerConfiguration {
 	/**
 	 * Swagger API 문서 생성
@@ -38,7 +37,7 @@ public class SwaggerConfiguration {
 			// RequestHandlerSelectors.basePackage("com.cooingpop.apiclient.api.member.controller") 특정 패키지
 			.paths(PathSelectors.any())
 			.build()
-			.useDefaultResponseMessages(true); //기본으로 세팅되는 200, 401, 메시지 표시
+			.useDefaultResponseMessages(true); // 기본으로 세팅되는 200, 401, 메시지 표시
 	}
 	/**
 	 * Swagger Infomation

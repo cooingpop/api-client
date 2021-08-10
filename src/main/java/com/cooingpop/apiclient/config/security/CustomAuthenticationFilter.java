@@ -17,7 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.cooingpop.apiclient.api.member.model.User;
+import com.cooingpop.apiclient.api.member.domain.User;
 import com.cooingpop.apiclient.error.exception.InputNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,7 +39,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 		} catch (IOException exception){
 			throw new InputNotFoundException(exception);
 		}
+
 		setDetails(request, authRequest);
+
 		return this.getAuthenticationManager().authenticate(authRequest);
 	}
 }

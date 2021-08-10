@@ -48,6 +48,7 @@ import com.cooingpop.apiclient.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 
 /**
+ *
  * @author 박준영
  **/
 @Configuration
@@ -87,8 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 			.formLogin().disable()
 			.authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
 			.anyRequest().permitAll()
-			// .antMatchers("/test/**").permitAll()
-			// .antMatchers("/*/signIn", "/*/signUp").permitAll() // 가입 및 인증 주소는 누구나 접근가능
 			.and()
 			.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 			.and()
