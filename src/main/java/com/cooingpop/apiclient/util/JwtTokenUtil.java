@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import com.cooingpop.apiclient.api.member.model.User;
+import com.cooingpop.apiclient.api.member.domain.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -37,6 +37,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 토큰 생성 유틸
  * @author 박준영
  **/
 @RequiredArgsConstructor
@@ -47,10 +48,6 @@ public class JwtTokenUtil {
 	private static long ACCESS_TOKEN_VALIDATION = 60 * 60 * 1000;
 	private static long REFRESH_TOKEN_VALIDATION = 60 * 60 * 24 * 30 * 1000;
 	private final UserDetailsService userDetailsService;
-	// @PostConstruct
-	// protected void init() {
-	// 	SECRET_KEY = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
-	// }
 
 	// access token 생성
 	public static String generateAccessToken(User user) {
@@ -135,6 +132,11 @@ public class JwtTokenUtil {
 		Claims claims = getClaimsFormToken(token);
 
 		return claims.get("role").toString();
+	}
+
+	public static long getTokenExpiredAt(String token) {
+		Claims claims = getClaimsFormToken(token);
+		return claims.getExpiration().toInstant().toEpochMilli();
 	}
 
 	public static String getUserNameFromToken(String token) {
