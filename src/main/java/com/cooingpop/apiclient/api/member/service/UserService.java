@@ -14,9 +14,10 @@ import javax.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.cooingpop.apiclient.api.member.dto.SearchDTO;
 import com.cooingpop.apiclient.api.member.dto.SignInDTO;
 import com.cooingpop.apiclient.api.member.dto.SignUpDTO;
-import com.cooingpop.apiclient.api.member.model.User;
+import com.cooingpop.apiclient.api.member.domain.User;
 import com.cooingpop.apiclient.api.member.repository.UserRepository;
 import com.cooingpop.apiclient.common.UserRole;
 
@@ -54,12 +55,20 @@ public class UserService {
 		return userRepository.findExistByEmail(email);
 	}
 
-	public Optional<User>  signIn(SignInDTO signInDTO) {
+	public Optional<User> signIn(SignInDTO signInDTO) {
 		final User user = User.builder()
 			.email(signInDTO.getEmail())
 			.role(UserRole.ROLE_USER)
 			.build();
 
-		return userRepository.findByEmail(signInDTO.getEmail());
+		return userRepository.findByEmail(user.getEmail());
+	}
+
+	public Optional<User> findUserByEmail(final SearchDTO searchDTO) {
+		final User user = User.builder()
+			.email(searchDTO.getEmail())
+			.build();
+
+		return userRepository.findUserByEmail(user.getEmail());
 	}
 }

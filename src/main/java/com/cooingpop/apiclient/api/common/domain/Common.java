@@ -9,6 +9,8 @@ package com.cooingpop.apiclient.api.common.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +31,11 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class Common implements Serializable {
+	@AttributeOverrides({
+		@AttributeOverride(name="createdAt", column=@Column(name="created_at")),
+		@AttributeOverride(name="updatedAt", column=@Column(name="updated_at")),
+	})
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)

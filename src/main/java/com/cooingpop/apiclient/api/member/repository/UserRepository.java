@@ -11,7 +11,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cooingpop.apiclient.api.member.model.User;
+import com.cooingpop.apiclient.api.member.domain.User;
 
 /**
  * @author 박준영
@@ -20,4 +20,5 @@ import com.cooingpop.apiclient.api.member.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<Boolean> findExistByEmail(String email);
 	Optional<User> findByEmail(String email);
+	Optional<User> findUserByEmail(String email);
 }
