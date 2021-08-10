@@ -4,7 +4,7 @@
  * Created by cooingpop
  */
 
-package com.cooingpop.apiclient;
+package com.cooingpop.apiclient.config.external;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
