@@ -1,0 +1,11 @@
+POST http://localhost:8080/user/signUp
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "박준영",
+  "nickname": "조이",
+  "email": "cooingpop@gmail.com",
+  "mobile": "01039993969",
+  "pwd": "abc",
+  "gender": "남"
+}

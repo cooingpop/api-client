@@ -8,7 +8,7 @@ package com.cooingpop.apiclient.api.member.dto;
 
 import java.util.List;
 
-import com.cooingpop.apiclient.api.member.model.User;
+import com.cooingpop.apiclient.api.member.domain.User;
 
 import lombok.Builder;
 import lombok.Getter;

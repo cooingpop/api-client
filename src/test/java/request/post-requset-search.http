@@ -1,0 +1,6 @@
+GET http://localhost:8080/user/serach
+Content-Type: application/json;charset=UTF-8
+
+{
+  "email": "cooingpop@gmail.com"
+}

@@ -4,7 +4,7 @@
  * Created by cooingpop
  */
 
-package com.cooingpop.apiclient.api.member.model;
+package com.cooingpop.apiclient.api.member.domain;
 
 import java.util.Collection;
 

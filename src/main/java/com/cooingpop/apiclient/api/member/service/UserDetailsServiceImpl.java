@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.cooingpop.apiclient.api.member.model.ClientUserDetails;
+import com.cooingpop.apiclient.api.member.domain.ClientUserDetails;
 import com.cooingpop.apiclient.api.member.repository.UserRepository;
 import com.cooingpop.apiclient.error.exception.UserNotFoundException;
 
@@ -28,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	private final UserRepository userRepository;
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		return userRepository.findByEmail(email)
