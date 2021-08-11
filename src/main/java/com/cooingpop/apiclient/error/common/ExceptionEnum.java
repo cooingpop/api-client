@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 /**
+ * 오류 정의 클래스
  * @author 박준영
  **/
 @Getter
@@ -13,7 +14,8 @@ public enum ExceptionEnum {
 	ACCESS_DENIED_EXCEPTION(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.name()),
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.name()),
 
-	SECURITY_01(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.name(), "권한이 없습니다.");
+	SECURITY_01(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.name(), "권한이 없습니다."),
+	INVALID_TOKEN(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.name(), "유효하지 않은 토큰입니다.");
 
 	private final HttpStatus status;
 	private final String code;
