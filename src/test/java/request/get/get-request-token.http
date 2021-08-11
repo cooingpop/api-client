@@ -1,0 +1,3 @@
+# 로그아웃 한 토큰 조회
+GET http://localhost:8080/auth/token
+Content-Type: application/json;charset=UTF-8
