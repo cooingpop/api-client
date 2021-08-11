@@ -28,8 +28,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
-import com.cooingpop.apiclient.util.JwtTokenBlockUtil;
 import com.cooingpop.apiclient.config.hanlder.CustomLoginSuccessHandler;
+import com.cooingpop.apiclient.util.JwtTokenBlockUtil;
 import com.cooingpop.apiclient.util.JwtTokenUtil;
 
 import lombok.RequiredArgsConstructor;

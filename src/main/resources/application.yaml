@@ -1,6 +1,8 @@
 spring:
   application:
     name: api-client
+  profiles:
+    active: local
   port: 8080
   shutdown: graceful
   datasource:
@@ -34,3 +36,7 @@ server:
       charset: utf-8
       enabled: true
       force: true
+
+api:
+  version: '@project.version@'
+  url: 'http://127.0.0.1:${spring.port}'

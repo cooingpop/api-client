@@ -6,16 +6,21 @@
 
 package com.cooingpop.apiclient.config.external;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 
 /**
  * Swagger Configuration
@@ -24,28 +29,43 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  **/
 @Configuration
 public class SwaggerConfiguration {
+	@Value("${api.version}")
+	String appVersion;
+	@Value("${api.url}")
+	String url;
+	@Value("${spring.profiles.active}")
+	String active;
+
 	/**
-	 * Swagger API 문서 생성
+	 * Swagger API 설정
 	 * @return
 	 */
 	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.OAS_30) // open api spec 3.0
-			.apiInfo(swaggerInfo()) // swagger 정보 등록
-			.select()
-			.apis(RequestHandlerSelectors.any()) //  모든 컨트롤러 패키지 탐색시
-			// RequestHandlerSelectors.basePackage("com.cooingpop.apiclient.api.member.controller") 특정 패키지
-			.paths(PathSelectors.any())
-			.build()
-			.useDefaultResponseMessages(true); // 기본으로 세팅되는 200, 401, 메시지 표시
+	public OpenAPI openAPI() {
+		List<Server> servers = Arrays.asList(new Server().url(url).description("api (" + active +")"));
+
+		SecurityScheme securityScheme = new SecurityScheme()
+			.type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
+			.in(SecurityScheme.In.HEADER).name("Authorization");
+		SecurityRequirement schemaRequirement = new SecurityRequirement().addList("bearerAuth");
+
+		return new OpenAPI()
+			.components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
+			.addSecurityItem(schemaRequirement)
+			.security(Arrays.asList(schemaRequirement))
+			.info(swaggerInfo())
+			.servers(servers);
 	}
+
 	/**
 	 * Swagger Infomation
 	 * @return
 	 */
-	private ApiInfo swaggerInfo() {
-		return new ApiInfoBuilder().title("Spring Boot API Documentation")
-			.description("앱 개발시 사용되는 서버 API에 대한 연동 문서입니다")
-			.license("cooingpop").licenseUrl("https://vitalholic.tistory.com/").version("1.0.0").build();
+	private Info swaggerInfo () {
+		return new Info().title("Demo API - " + active).version(appVersion)
+			.description("Spring Boot를 이용한 Demo 웹 애플리케이션 API입니다.")
+			.termsOfService("http://swagger.io/terms/")
+			.contact(new Contact().name("cooingpop").url("https://vitalholic.tistory.com/").email("cooingpop@gmail.com"))
+			.license(new License().name("Apache License Version 2.0").url("http://www.apache.org/licenses/LICENSE-2.0"));
 	}
 }
