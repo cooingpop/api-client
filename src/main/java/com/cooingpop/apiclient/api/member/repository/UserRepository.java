@@ -18,7 +18,7 @@ import com.cooingpop.apiclient.api.member.domain.User;
  **/
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	Optional<Boolean> findExistByEmail(String email);
+	Optional<Integer> countByEmail(String email);
 	Optional<User> findByEmail(String email);
 	Optional<User> findUserByEmail(String email);
 }

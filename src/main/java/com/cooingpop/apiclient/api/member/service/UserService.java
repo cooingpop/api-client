@@ -14,16 +14,16 @@ import javax.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cooingpop.apiclient.api.member.dto.SearchDTO;
-import com.cooingpop.apiclient.api.member.dto.SignInDTO;
-import com.cooingpop.apiclient.api.member.dto.SignUpDTO;
 import com.cooingpop.apiclient.api.member.domain.User;
+import com.cooingpop.apiclient.api.member.dto.SignUpRequestDTO;
 import com.cooingpop.apiclient.api.member.repository.UserRepository;
 import com.cooingpop.apiclient.common.UserRole;
 
 import lombok.RequiredArgsConstructor;
 
 /**
+ * 회원 관련 서비스
+ * 
  * @author 박준영
  **/
 @RequiredArgsConstructor
@@ -32,43 +32,58 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 
+	/**
+	 * 회원가입
+	 * @param signUpRequestDTO
+	 * @return
+	 */
 	@Transactional
-	public User signUp(final SignUpDTO signUpDTO) {
+	public User signUp(final SignUpRequestDTO signUpRequestDTO) {
 		final User user = User.builder()
-			.name(signUpDTO.getName())
-			.nickname(signUpDTO.getNickname())
-			.pwd(passwordEncoder.encode(signUpDTO.getPwd()))
-			.mobile(signUpDTO.getMobile())
-			.email(signUpDTO.getEmail())
-			.gender(signUpDTO.getGender())
+			.name(signUpRequestDTO.getName())
+			.nickname(signUpRequestDTO.getNickname())
+			.pwd(passwordEncoder.encode(signUpRequestDTO.getPwd()))
+			.mobile(signUpRequestDTO.getMobile())
+			.email(signUpRequestDTO.getEmail())
+			.gender(signUpRequestDTO.getGender())
 			.role(UserRole.ROLE_USER)
 			.build();
 
 		return userRepository.save(user);
 	}
 
+	/**
+	 * 회원 목록 조회
+	 * @return
+	 */
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 
-	public Optional<Boolean> duplicatedEmail(final String email) {
-		return userRepository.findExistByEmail(email);
+	/**
+	 * 이메일 중복 체크
+	 * @param email
+	 * @return
+	 */
+	public Optional<Integer> duplicatedEmail(final String email) {
+		return userRepository.countByEmail(email);
 	}
 
-	public Optional<User> signIn(SignInDTO signInDTO) {
-		final User user = User.builder()
-			.email(signInDTO.getEmail())
-			.role(UserRole.ROLE_USER)
-			.build();
-
-		return userRepository.findByEmail(user.getEmail());
+	/**
+	 * 로그인
+	 * @param email
+	 * @return
+	 */
+	public Optional<User> signIn(final String email) {
+		return userRepository.findByEmail(email);
 	}
 
-	public Optional<User> findUserByEmail(final SearchDTO searchDTO) {
-		final User user = User.builder()
-			.email(searchDTO.getEmail())
-			.build();
-
-		return userRepository.findUserByEmail(user.getEmail());
+	/**
+	 * 이메일로 회원 검색
+	 * @param email
+	 * @return
+	 */
+	public Optional<User> findUserByEmail(final String email) {
+		return userRepository.findUserByEmail(email);
 	}
 }
