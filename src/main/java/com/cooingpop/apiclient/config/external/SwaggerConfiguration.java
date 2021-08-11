@@ -62,8 +62,8 @@ public class SwaggerConfiguration {
 	 * @return
 	 */
 	private Info swaggerInfo () {
-		return new Info().title("Demo API - " + active).version(appVersion)
-			.description("Spring Boot를 이용한 Demo 웹 애플리케이션 API입니다.")
+		return new Info().title("API - " + active).version(appVersion)
+			.description("Spring Boot를 이용한 RST API")
 			.termsOfService("http://swagger.io/terms/")
 			.contact(new Contact().name("cooingpop").url("https://vitalholic.tistory.com/").email("cooingpop@gmail.com"))
 			.license(new License().name("Apache License Version 2.0").url("http://www.apache.org/licenses/LICENSE-2.0"));
