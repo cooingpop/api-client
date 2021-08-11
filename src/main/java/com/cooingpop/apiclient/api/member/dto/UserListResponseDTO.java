@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 /**
+ * 회원 목록 Response
  * @author 박준영
  **/
 @Getter

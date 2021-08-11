@@ -9,10 +9,11 @@ package com.cooingpop.apiclient.api.member.dto;
 import lombok.Data;
 
 /**
+ * 회원가입 request
  * @author 박준영
  **/
 @Data
-public class SignUpDTO {
+public class SignUpRequestDTO {
 	private String name;
 	private String nickname;
 	private String email;
