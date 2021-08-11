@@ -9,6 +9,7 @@ package com.cooingpop.apiclient.config;
 import org.hibernate.dialect.MySQL5Dialect;
 
 /**
+ * Mysql DB 커스텀 설정
  * @author 박준영
  **/
 public class MySQLCustomDialect extends MySQL5Dialect {
