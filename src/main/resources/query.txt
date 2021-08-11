@@ -1,16 +1,16 @@
 ## 회원 테이블
 CREATE TABLE `user` (
-  `user_seq` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime NOT NULL,
-  `is_enable` bit(1) NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `nickname` varchar(30) NOT NULL,
-  `pwd` varchar(255) NOT NULL,
-  `role` varchar(50) NOT NULL,
+  `user_seq` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
+  `created_at` datetime NOT NULL COMMENT '생성일자',
+  `is_enable` bit(1) NOT NULL COMMENT '사용여부',
+  `updated_at` datetime DEFAULT NULL COMMENT '수정일자',
+  `email` varchar(100) NOT NULL COMMENT '이메일',
+  `gender` varchar(255) DEFAULT NULL COMMENT '성별',
+  `mobile` varchar(20) NOT NULL COMMENT '전화번호',
+  `name` varchar(20) NOT NULL COMMENT '이름',
+  `nickname` varchar(30) NOT NULL COMMENT '별명',
+  `pwd` varchar(255) NOT NULL COMMENT '비밀번호',
+  `role` varchar(50) NOT NULL COMMENT '권한',
   PRIMARY KEY (`user_seq`),
   UNIQUE KEY `uk_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -18,13 +18,13 @@ CREATE TABLE `user` (
 ## 주문 테이블
 CREATE TABLE `payment` (
   `payment_seq` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime NOT NULL,
-  `is_enable` bit(1) NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `payment_at` datetime NOT NULL,
-  `payment_no` varchar(12) NOT NULL,
-  `product_name` varchar(100) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `user_seq` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL COMMENT '생성일자',
+  `is_enable` bit(1) NOT NULL COMMENT '사용여부',
+  `updated_at` datetime DEFAULT NULL COMMENT '수정일자',
+  `payment_at` datetime NOT NULL COMMENT '결제일시',
+  `payment_no` varchar(12) NOT NULL COMMENT '주문번호',
+  `product_name` varchar(100) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '제품명',
+  `user_seq` bigint(20) NOT NULL COMMENT '회원번호',
   PRIMARY KEY (`payment_seq`),
   UNIQUE KEY `uk_payment_no` (`payment_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
