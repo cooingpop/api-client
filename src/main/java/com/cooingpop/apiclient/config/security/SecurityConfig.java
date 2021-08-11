@@ -28,7 +28,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
-import com.cooingpop.apiclient.common.JwtTokenBlockList;
+import com.cooingpop.apiclient.util.JwtTokenBlockUtil;
 import com.cooingpop.apiclient.config.hanlder.CustomLoginSuccessHandler;
 import com.cooingpop.apiclient.util.JwtTokenUtil;
 
@@ -87,7 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 				throws IOException, ServletException {
 				super.onLogoutSuccess(request, response, authentication);
-				JwtTokenBlockList.insertBlockToken(JwtTokenUtil.resolveToken(request));
+				JwtTokenBlockUtil.insertBlockToken(JwtTokenUtil.resolveToken(request));
 			}
 		};
 	}
