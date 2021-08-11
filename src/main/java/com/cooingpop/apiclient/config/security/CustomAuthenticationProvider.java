@@ -19,6 +19,7 @@ import com.cooingpop.apiclient.api.member.domain.ClientUserDetails;
 import lombok.RequiredArgsConstructor;
 
 /**
+ * Spring Security 인증절차
  * @author 박준영
  **/
 @RequiredArgsConstructor
