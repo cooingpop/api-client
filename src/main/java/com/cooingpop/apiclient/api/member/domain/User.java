@@ -14,6 +14,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -46,6 +49,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends Common implements Serializable {
+	@AttributeOverrides({
+		@AttributeOverride(name="userSeq", column=@Column(name="user_seq"))
+	})
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
+	private Long userSeq; // 고유번호
+
 	@Schema(description = "이름")
 	@Column(nullable = false, length = 20)
 	private String name;

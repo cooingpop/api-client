@@ -36,11 +36,6 @@ public class Common implements Serializable {
 		@AttributeOverride(name="updatedAt", column=@Column(name="updated_at")),
 	})
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id; // 고유번호
-
 	@CreationTimestamp
 	@Column(nullable = false, length = 20, updatable = false)
 	private LocalDateTime createdAt; // 등록 일자
