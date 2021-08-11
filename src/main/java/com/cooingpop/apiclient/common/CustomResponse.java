@@ -19,34 +19,24 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class CustomResponse<T> {
-	private String status;
-	private int code;
+	private int status;
 	private String message;
 	private T data;
 
-	public CustomResponse(int code, String message) {
-		this.code = code;
+	public CustomResponse(int status, String message) {
+		this.status = status;
 		this.message = message;
 		this.data = null;
 	}
 
-	public static<T> CustomResponse<T> res(int code, String message) {
-		return res(code, message, null);
+	public static<T> CustomResponse<T> res(int status, String message) {
+		return res(status, message, null);
 	}
 
-	public static<T> CustomResponse<T> res(int code, String message, T t) {
-		return CustomResponse.<T>builder()
-			.data(t)
-			.code(code)
-			.message(message)
-			.build();
-	}
-
-	public static<T> CustomResponse<T> res(String status, int code, String message, T t) {
+	public static<T> CustomResponse<T> res(int status, String message, T t) {
 		return CustomResponse.<T>builder()
 			.data(t)
 			.status(status)
-			.code(code)
 			.message(message)
 			.build();
 	}
