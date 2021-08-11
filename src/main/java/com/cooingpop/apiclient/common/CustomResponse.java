@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
+ * 공통 응답 클래스
+ *
  * @author 박준영
  **/
 @Data

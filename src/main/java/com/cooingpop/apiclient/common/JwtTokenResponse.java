@@ -18,7 +18,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class CustomTokenResponse implements Serializable {
+public class JwtTokenResponse implements Serializable {
 	private String access_token;
 	private long expired_at;
 }
