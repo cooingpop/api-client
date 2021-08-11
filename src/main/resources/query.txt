@@ -1,0 +1,30 @@
+## 회원 테이블
+CREATE TABLE `user` (
+  `user_seq` bigint(20) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime NOT NULL,
+  `is_enable` bit(1) NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `nickname` varchar(30) NOT NULL,
+  `pwd` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_seq`),
+  UNIQUE KEY `uk_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+## 주문 테이블
+CREATE TABLE `payment` (
+  `payment_seq` bigint(20) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime NOT NULL,
+  `is_enable` bit(1) NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `payment_at` datetime NOT NULL,
+  `payment_no` varchar(12) NOT NULL,
+  `product_name` varchar(100) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `user_seq` bigint(20) NOT NULL,
+  PRIMARY KEY (`payment_seq`),
+  UNIQUE KEY `uk_payment_no` (`payment_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
