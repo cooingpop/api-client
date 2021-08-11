@@ -12,9 +12,6 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-
-//    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
-//    compile.exclude module: 'spring-boot-starter-logging'
 }
 
 repositories {
@@ -42,7 +39,6 @@ dependencies {
     compileOnly 'org.springframework.boot:spring-boot-starter-jdbc'
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'mysql:mysql-connector-java'
-
 
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
