@@ -15,4 +15,5 @@ import lombok.Data;
 @Data
 public class SearchRequestDTO {
 	private String email;
+	private String name;
 }

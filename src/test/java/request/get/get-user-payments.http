@@ -1,4 +1,4 @@
 # 단일 회원의 주문 목록 조회
-GET http://localhost:8080/user/1/payments
+GET http://localhost:8080/v1/api/user/1/payments
 Content-Type: application/json;charset=UTF-8
 Authorization: bearer eyJyZWdEYXRlIjoxNjI4NjY0MTE4OTY0LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwibmFtZSI6IuuwleykgOyYgSIsImVtYWlsIjoiY29vaW5ncG9wQGdtYWlsLmNvbSIsImlhdCI6MTYyODY2NDExOCwiZXhwIjoxNjI4NjY3NzE4fQ.RQym-rmKr_28IouhiTdjtkIYrOUSB100bN8dH-PpBk0

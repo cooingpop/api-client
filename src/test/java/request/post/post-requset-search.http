@@ -1,8 +1,0 @@
-# 단일 회원 검색
-GET http://localhost:8080/user/search
-Content-Type: application/json;charset=UTF-8
-Authorization: bearer eyJyZWdEYXRlIjoxNjI4Njc3MDEzNzYxLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwibmFtZSI6IuuwleykgOyYgSIsImVtYWlsIjoiY29vaW5ncG9wQGdtYWlsLmNvbSIsImlhdCI6MTYyODY3NzAxMywiZXhwIjoxNjI4NjgwNjEzfQ.Epgt2NnoomyNoin7Amc1hr37OiV7ooRlU5gm6Dj8RKE
-
-{
-  "email": "cooingpop@gmail.com"
-}

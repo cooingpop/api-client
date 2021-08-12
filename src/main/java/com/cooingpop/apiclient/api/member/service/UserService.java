@@ -7,6 +7,7 @@
 package com.cooingpop.apiclient.api.member.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -15,9 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cooingpop.apiclient.api.member.domain.User;
+import com.cooingpop.apiclient.api.member.dto.SearchRequestDTO;
 import com.cooingpop.apiclient.api.member.dto.SignUpRequestDTO;
 import com.cooingpop.apiclient.api.member.repository.UserRepository;
 import com.cooingpop.apiclient.common.UserRole;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -56,7 +59,13 @@ public class UserService {
 	 * 회원 목록 조회
 	 * @return
 	 */
-	public List<User> findAll() {
+	public List<User> findAll(final SearchRequestDTO searchRequestDTO) {
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		Map<String, Object> searchMap = objectMapper.convertValue(searchRequestDTO, Map.class);
+		for (String key : searchMap.keySet()) {
+			System.out.println(key);
+		}
 		return userRepository.findAll();
 	}
 
@@ -74,7 +83,7 @@ public class UserService {
 	 * @param email
 	 * @return
 	 */
-	public Optional<User> signIn(final String email) {
+	public Optional<User> logIn(final String email) {
 		return userRepository.findByEmail(email);
 	}
 
