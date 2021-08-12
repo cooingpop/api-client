@@ -78,7 +78,7 @@ public class UserController {
 	@Operation(summary = "여러 회원 목록 조회", description = "여러 회원 목록을 조회합니다.")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "여러 회원 목록 조회 성공"),
-		@ApiResponse(responseCode = "400", description = "단일 회원 상세 정보 조회 오류")})
+		@ApiResponse(responseCode = "400", description = "여러 회원 목록 조회 오류")})
 	@GetMapping(value = "/list", headers = { "Content-type=application/json" }, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<CustomResponse<UserListResponseDTO>> findAllUser() {
 		try {
