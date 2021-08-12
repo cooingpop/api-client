@@ -8,6 +8,7 @@ package com.cooingpop.apiclient.api.member.controller;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooingpop.apiclient.api.member.domain.User;
-import com.cooingpop.apiclient.api.member.dto.SearchRequestDTO;
 import com.cooingpop.apiclient.api.member.dto.LogInRequestDTO;
+import com.cooingpop.apiclient.api.member.dto.SearchRequestDTO;
 import com.cooingpop.apiclient.api.member.dto.SignUpRequestDTO;
 import com.cooingpop.apiclient.api.member.dto.UserListResponseDTO;
 import com.cooingpop.apiclient.api.member.dto.UserResponseDTO;
@@ -124,31 +126,14 @@ public class UserController {
 	@GetMapping(value = "/api/user", headers = { "Content-type=application/json" }, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<CustomResponse<UserResponseDTO>> findUserByEmail(@RequestBody final SearchRequestDTO searchRequestDTO) {
 		try {
-			final UserResponseDTO userResponseDTO = UserResponseDTO.builder().user(userService.findUserByEmail(searchRequestDTO.getEmail())).build();
-			if (userResponseDTO.getUser().isPresent()) {
-				return new ResponseEntity(CustomResponse.res(HttpStatus.OK.value(), ResponseMessage.SEARCH_SUCCESS, userResponseDTO), HttpStatus.OK);
+			Optional<User> user = userService.findUserByEmail(searchRequestDTO.getEmail());
+			if (user.isPresent()) {
+				return new ResponseEntity(CustomResponse.res(HttpStatus.OK.value(), ResponseMessage.SEARCH_SUCCESS, UserResponseDTO.builder().user(user.get()).build()), HttpStatus.OK);
 			} else {
-				return new ResponseEntity(CustomResponse.res(HttpStatus.NO_CONTENT.value(), ResponseMessage.USER_NOT_FOUND), HttpStatus.NO_CONTENT);
+				return new ResponseEntity(CustomResponse.res(HttpStatus.NO_CONTENT.value(), ResponseMessage.USER_NOT_FOUND), HttpStatus.OK);
 			}
 		} catch (Exception ex) {
 			log.error("findUserByEmail Exception" + ex.getMessage(), ex);
-			return new ResponseEntity(CustomResponse.res(HttpStatus.BAD_REQUEST.value(), ResponseMessage.SEARCH_FAIL, ex.getMessage()), HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	@Operation(summary = "여러 회원 목록 조회", description = "여러 회원 목록을 조회합니다.")
-	@ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "여러 회원 목록 조회 성공"),
-		@ApiResponse(responseCode = "400", description = "여러 회원 목록 조회 오류")})
-	@GetMapping(value = "/api/users", headers = { "Content-type=application/json" }, produces = "application/json", consumes = "application/json")
-	public ResponseEntity<CustomResponse<UserListResponseDTO>> findAllUser(@RequestBody(required = false) final SearchRequestDTO searchRequestDTO) {
-		try {
-			final UserListResponseDTO userListResponseDTO = UserListResponseDTO.builder()
-				.userList(userService.findAll(searchRequestDTO)).build();
-
-			return new ResponseEntity(CustomResponse.res(HttpStatus.OK.value(), ResponseMessage.SEARCH_SUCCESS, userListResponseDTO), HttpStatus.OK);
-		} catch (Exception ex) {
-			log.error("findAllUser Exception" + ex.getMessage(), ex);
 			return new ResponseEntity(CustomResponse.res(HttpStatus.BAD_REQUEST.value(), ResponseMessage.SEARCH_FAIL, ex.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -170,6 +155,24 @@ public class UserController {
 			return new ResponseEntity(
 				CustomResponse.res(HttpStatus.BAD_REQUEST.value(), ResponseMessage.SEARCH_FAIL, ex.getMessage()),
 				HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Operation(summary = "여러 회원 목록 조회", description = "여러 회원 목록을 조회합니다.")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "여러 회원 목록 조회 성공"),
+		@ApiResponse(responseCode = "400", description = "여러 회원 목록 조회 오류")})
+	@GetMapping(value = "/api/users", headers = { "Content-type=application/json" }, produces = "application/json", consumes = "application/json")
+	@ResponseBody
+	public ResponseEntity<CustomResponse<UserListResponseDTO>> findAllUser(@RequestBody(required = false) final SearchRequestDTO searchRequestDTO, Pageable pageable) {
+		try {
+			final UserListResponseDTO userListResponseDTO = UserListResponseDTO.builder()
+				.users(userService.findAll(searchRequestDTO, pageable)).build();
+
+			return new ResponseEntity(CustomResponse.res(HttpStatus.OK.value(), ResponseMessage.SEARCH_SUCCESS, userListResponseDTO), HttpStatus.OK);
+		} catch (Exception ex) {
+			log.error("findAllUser Exception" + ex.getMessage(), ex);
+			return new ResponseEntity(CustomResponse.res(HttpStatus.BAD_REQUEST.value(), ResponseMessage.SEARCH_FAIL, ex.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

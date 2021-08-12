@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.cooingpop.apiclient.api.member.domain.ClientUserDetails;
+import com.cooingpop.apiclient.config.domain.ClientUserDetails;
 import com.cooingpop.apiclient.api.member.domain.User;
 import com.cooingpop.apiclient.common.AuthConstants;
 import com.cooingpop.apiclient.util.JwtTokenUtil;

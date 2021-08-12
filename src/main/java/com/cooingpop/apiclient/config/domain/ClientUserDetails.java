@@ -4,12 +4,14 @@
  * Created by cooingpop
  */
 
-package com.cooingpop.apiclient.api.member.domain;
+package com.cooingpop.apiclient.config.domain;
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.cooingpop.apiclient.api.member.domain.User;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

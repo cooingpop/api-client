@@ -6,7 +6,7 @@
 
 package com.cooingpop.apiclient.api.member.dto;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.cooingpop.apiclient.api.member.domain.User;
 
@@ -24,5 +24,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
 public class UserListResponseDTO {
-	private final List<User> userList;
+	private final Page<User> users;
 }

@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.cooingpop.apiclient.api.member.domain.ClientUserDetails;
+import com.cooingpop.apiclient.config.domain.ClientUserDetails;
 import com.cooingpop.apiclient.api.member.repository.UserRepository;
 import com.cooingpop.apiclient.error.exception.UserNotFoundException;
 

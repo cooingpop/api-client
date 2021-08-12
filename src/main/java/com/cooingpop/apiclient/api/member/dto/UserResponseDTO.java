@@ -24,5 +24,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
 public class UserResponseDTO {
-	private final Optional<User> user;
+	private final User user;
 }
