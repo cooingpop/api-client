@@ -13,7 +13,7 @@ import lombok.Data;
  * @author 박준영
  **/
 @Data
-public class SignInRequestDTO {
+public class LogInRequestDTO {
 	private String email;
 	private String pwd;
 }
