@@ -1,5 +1,5 @@
 # 회원가입
-POST http://localhost:8080/v1/user/signup
+POST http://localhost:8080/v1/api/user/signup
 Content-Type: application/json;charset=UTF-8
 
 {
