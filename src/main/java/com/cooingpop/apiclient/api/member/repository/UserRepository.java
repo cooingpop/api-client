@@ -9,6 +9,7 @@ package com.cooingpop.apiclient.api.member.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.cooingpop.apiclient.api.member.domain.User;
@@ -17,7 +18,7 @@ import com.cooingpop.apiclient.api.member.domain.User;
  * @author 박준영
  **/
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor {
 	Optional<Integer> countByEmail(String email);
 	Optional<User> findByEmail(String email);
 	Optional<User> findUserByEmail(String email);

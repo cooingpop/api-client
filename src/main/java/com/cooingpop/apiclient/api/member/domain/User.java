@@ -67,7 +67,7 @@ public class User extends Common implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String nickname;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // 응답결과 포함시키지 않고, 사용할때만 포함하도록
 	@Schema(description = "비밀번호")
 	@Setter
 	@Column(nullable = false)
